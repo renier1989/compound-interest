@@ -10,7 +10,7 @@ export const Input = ({ label, ...props }) => {
       <input {...field} {...props}  className="outline-1 outline-indigo-400 border-indigo-300 border-2 w-full rounded-md py-1 "/>
       {meta.touched && meta.error ? (
         <div>
-          <span className="font-semibold text-red-400">Mensaje de error</span>
+          <span className="font-semibold text-red-400">{meta.error}</span>
         </div>
       ) : null}
     </div>

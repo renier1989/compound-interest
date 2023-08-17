@@ -2,7 +2,7 @@ import { Form, Formik } from "formik";
 import { Input } from "./components/Input";
 import { Button } from "./components/Button";
 import { useState } from "react";
-
+import * as Yup from 'yup'
 const compoundInterest = (deposit, contribution, years, rate) => {
   let total = deposit;
   for (let i = 0; i < years; i++) {
@@ -47,13 +47,19 @@ function App() {
             rate: "",
           }}
           onSubmit={handleSubmit}
+          validationSchema={Yup.object({
+            deposit: Yup.number().required('Initial Deposit is Required.').typeError('Entre a Valid Number'),
+            contribution: Yup.number().required('Anual Contribiton is Required.').typeError('Entre a Valid Number'),
+            years: Yup.number().required('Years is Required.').typeError('Entre a Valid Number'),
+            rate: Yup.number().required('Estimated Interest is Required.').typeError('Entre a Valid Number').min(0, 'Min value is 0').max(1, 'Max value is 1'),
+          })}
         >
           <Form>
             <Input name="deposit" label="Initial Deposit"></Input>
             <Input name="contribution" label="Anual Contribution"></Input>
             <Input name="years" label="Years"></Input>
             <Input name="rate" label="Estimated Interest"></Input>
-            <Button />
+            <Button type="submit" />
           </Form>
         </Formik>
         
